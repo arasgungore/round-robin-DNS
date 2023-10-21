@@ -1,10 +1,13 @@
 #include "Client.h"
 #include <iostream>
 
+// Constructor to initialize CachedContent.
 Client::CachedContent::CachedContent(const std::string &domainName = "", const std::string &ipAddress = "") : domainName(domainName), ipAddress(ipAddress), hitNo(0) { }
 
+// Constructor to initialize a client with a name, IP address, and a reference to a DNS tree.
 Client::Client(const std::string &name, const std::string &ipAddress, const DnsTree &root) : root(root), name(name), ipAddress(ipAddress) { }
 
+// Send a DNS request and retrieve an IP address, caching the response.
 std::string Client::sendRequest(const std::string &domainName) {
 	for(auto i = cacheList.begin(); i != cacheList.end(); i++)
 		if(!i->domainName.compare(domainName)) {
@@ -18,6 +21,7 @@ std::string Client::sendRequest(const std::string &domainName) {
 	return ipAddress;
 }
 
+// Helper function to add an entry to the cache.
 void Client::addToCache(const std::string &domainName, const std::string &ipAddress) {
 	for(auto i = cacheList.begin(); i != cacheList.end(); i++)
 		if(!(i->domainName.compare(domainName) || i->ipAddress.compare(ipAddress)))
@@ -34,10 +38,12 @@ void Client::addToCache(const std::string &domainName, const std::string &ipAddr
 	*deleted = CachedContent(domainName, ipAddress);
 }
 
+// Clear the cache of DNS responses.
 void Client::clearCache() {
 	cacheList.clear();
 }
 
+// Print client information, including the name, IP address, and cached responses.
 void Client::printClientInfo() const {
 	std::cout << "Client Info:" << std::endl;
 	std::cout << "\tClient Name: " << name << std::endl;

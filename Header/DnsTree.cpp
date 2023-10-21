@@ -1,8 +1,10 @@
 #include "DnsTree.h"
 #include <iostream>
 
-DnsTree::DnsTree(const std::string &name) : root(), name(name) {}
+// Constructor to initialize a DnsTree with a given name.
+DnsTree::DnsTree(const std::string &name) : root(), name(name) { }
 
+// Insert a DNS record, mapping a domain name to an IP address.
 void DnsTree::insertRecord(const std::string &domainName, const std::string &ipAddress) {
 	std::string domainNameCopy = domainName;
 	DnsNode *n = root.getNode(domainNameCopy);
@@ -14,11 +16,13 @@ void DnsTree::insertRecord(const std::string &domainName, const std::string &ipA
 	root.createNode(domainNameCopy = domainName)->insertIpAddress(ipAddress);
 }
 
+// Remove a DNS record associated with the specified domain name.
 bool DnsTree::removeRecord(const std::string &domainName) {
 	std::string domainNameCopy = domainName;
 	return root.deleteNode(domainNameCopy);
 }
 
+// Remove a specific DNS record mapping a domain name to an IP address.
 bool DnsTree::removeRecord(const std::string &domainName, const std::string &ipAddress) {
 	std::string domainNameCopy = domainName;
 	DnsNode *n = root.getNode(domainNameCopy);
@@ -29,12 +33,14 @@ bool DnsTree::removeRecord(const std::string &domainName, const std::string &ipA
 	return false;
 }
 
+// Query for an IP address associated with a given domain name.
 std::string DnsTree::queryDomain(const std::string &domainName) {
 	std::string domainNameCopy = domainName;
 	DnsNode *n = root.getNode(domainNameCopy);
 	return n != nullptr ? n->getNextIpAddress() : "";
 }
 
+// Print all DNS records stored in the DNS tree, including subdomains and their IP addresses.
 void DnsTree::printAllRecords() const {
 	std::string domainName = "";
 	std::map<std::string, std::vector<std::string>> records = root.getAllRecords(domainName);
