@@ -2,7 +2,7 @@
 #include <iostream>
 
 // Constructor to initialize CachedContent.
-Client::CachedContent::CachedContent(const std::string &domainName = "", const std::string &ipAddress = "") : domainName(domainName), ipAddress(ipAddress), hitNo(0) { }
+Client::CachedContent::CachedContent(const std::string &domainName, const std::string &ipAddress) : domainName(domainName), ipAddress(ipAddress), hitNo(0) { }
 
 // Constructor to initialize a client with a name, IP address, and a reference to a DNS tree.
 Client::Client(const std::string &name, const std::string &ipAddress, const DnsTree &root) : root(root), name(name), ipAddress(ipAddress) { }
