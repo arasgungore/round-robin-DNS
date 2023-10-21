@@ -1,6 +1,6 @@
 # domain-name-system
 
-A C++ project which implements a domain name system (DNS) using a tree structure.
+A C++ project which implements a round-robin Domain Name System (DNS) using a tree structure.
 
 
 
