@@ -1,4 +1,4 @@
-# domain-name-system
+# round-robin-DNS
 
 A C++ project which implements a round-robin Domain Name System (DNS) using a tree structure.
 
